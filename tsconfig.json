@@ -1,6 +1,7 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "types": ["react-native-paper"],
     "strict": true,
     "baseUrl": ".",
     "paths": {

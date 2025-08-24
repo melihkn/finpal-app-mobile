@@ -2,7 +2,7 @@
 import * as SecureStore from "expo-secure-store";
 import { create } from "zustand";
 
-type User = { id: string; email: string };
+type User = { userId: string; email: string };
 type AuthState = {
   token: string | null;
   user: User | null;
