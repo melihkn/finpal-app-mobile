@@ -1,11 +1,9 @@
 // src/utils/env.ts
-import { Platform } from "react-native";
 
-const LOCAL =
-  Platform.OS === "android" ? "http://10.0.2.2:8080" : "http://localhost:8080";
+const LOCAL = "http://192.168.1.116:8080";
 // ↑ Android emulator uses 10.0.2.2 for the host machine
 
 export const ENV = {
   USE_MOCKS: false,              // <- turn off
-  API_BASE_URL: __DEV__ ? LOCAL : "https://api.your-domain.com",
+  API_BASE_URL: LOCAL
 };

@@ -9,18 +9,23 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const hydrated = useAuth(s => s.hydrated);
-  const hydrate = useAuth(s => s.hydrate);
 
-  useEffect(() => { hydrate(); }, []);
-  useEffect(() => { if (hydrated) SplashScreen.hideAsync(); }, [hydrated]);
+  // ✅ Get hydrate without subscribing the component to it
+  useEffect(() => {
+    useAuth.getState().hydrate();
+  }, []);
 
-  if (!hydrated) return null; // keep splash visible
+  useEffect(() => {
+    if (hydrated) SplashScreen.hideAsync();
+  }, [hydrated]);
+
+  if (!hydrated) return null;
 
   return (
     <QueryClientProvider client={qc}>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="auth" />
-        <Stack.Screen name="(app)" />
+        <Stack.Screen name="zaa" />
       </Stack>
     </QueryClientProvider>
   );
