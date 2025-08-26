@@ -20,7 +20,9 @@ export const useAuth = create<AuthState>((set) => ({
   login: async (token, user) => {
     await SecureStore.setItemAsync("token", token);
     await SecureStore.setItemAsync("user", JSON.stringify(user));
-    set({ token: token, user: user });
+    set({ token, user });
+    console.log("User logged in:", user);
+    console.log("Token:", token);
   },
 
   logout: async () => {

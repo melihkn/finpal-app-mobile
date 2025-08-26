@@ -2,7 +2,6 @@ import { authRepo } from "@/api/authApi";
 import { useAuth } from "@/state/auth.store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useRouter } from "expo-router";
-import * as SecureStore from "expo-secure-store";
 import React from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -52,19 +51,24 @@ export default function Register() {
   const [secureConfirm, setSecureConfirm] = React.useState(true);
 
   const onSubmit = async (data: FormData) => {
+    const response: any = null;
     try {
-      const { token, user } = await authRepo.register(
+      const response = await authRepo.register(
         data.email,
         data.password,
         data.firstname,
         data.lastname
       );
-      await SecureStore.setItemAsync("token", token);
-      await login(token, user);
-      router.replace("/tabs");
+
+      console.log("Registration successful 2:", response);
+
+      router.replace("/auth/login");
+
     } catch (e: any) {
+      console.log("Registration failed", e);
       Alert.alert("Register failed", e?.response?.data?.message ?? "Try again");
     }
+    
   };
 
   return (

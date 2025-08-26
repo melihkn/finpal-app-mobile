@@ -9,13 +9,13 @@ import { z } from "zod";
 
 // 👇 Material components
 import {
-    Button,
-    Card,
-    Divider,
-    HelperText,
-    Text,
-    TextInput,
-    TouchableRipple,
+  Button,
+  Card,
+  Divider,
+  HelperText,
+  Text,
+  TextInput,
+  TouchableRipple,
 } from "react-native-paper";
 
 const Schema = z.object({
@@ -37,10 +37,13 @@ export default function Login() {
   const onSubmit = async (data: FormData) => {
     try {
       console.log("Attempting login with", data);
-      const { token, user } = await authRepo.login(data.email, data.password);
-      console.log("Login successful");
-      login(token, user);
-      router.replace("/tabs"); // go to tabs home
+      const response = await authRepo.login(data.email, data.password);
+      console.log("Login successful", response);
+      console.log("Token:", response.data.token);
+      login(response.data.token, response.data.user);
+      const route = "../zaa/tabs/transactions";
+      console.log("Router replacing too ", route);
+      router.replace("../zaa/tabs/transactions");
     } catch (e: any) {
       console.log("Login failed", e);
       Alert.alert("Login failed", e?.response?.data?.message ?? "Try again");

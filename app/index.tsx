@@ -8,5 +8,6 @@ export default function Index() {
   const hydrated = useAuth(s => s.hydrated);
 
   if (!hydrated) return null;               // wait for SecureStore hydration
-  return <Redirect href={token ? "/tabs/transactions" : "/auth/login"} />;
+  return <Redirect href={token ? "/zaa/tabs/transactions" : "/auth/login"} />;
+  //return <Redirect href="/zaa/tabs/transactions"/>;
 }
